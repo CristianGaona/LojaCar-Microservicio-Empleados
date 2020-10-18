@@ -1,6 +1,7 @@
 package lojacar.ms.employee.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -58,6 +60,24 @@ public class EmployeeController {
 			return curso;
 		});
 		return ResponseEntity.ok().body(cursos);
+	}
+	
+	//Método que trae las actividades de otra microservicio
+	@GetMapping("/{id}")
+	public ResponseEntity<?> ver(@PathVariable Integer id) {
+		Optional<Employee> opt = service.findById1(id);
+		if (!opt.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+		Employee employee = opt.get();
+		if (employee.getEmployeeActivity().isEmpty() == false) {
+			List<Integer> ids = employee.getEmployeeActivity().stream().map(ca -> {
+				return ca.getActivityId();
+			}).collect(Collectors.toList());
+			List<Activity> activities = (List<Activity>) service.obtenerAlumnosPorCursos(ids);
+			employee.setActivities(activities);
+		}
+		return ResponseEntity.ok().body(employee);
 	}
 
 }

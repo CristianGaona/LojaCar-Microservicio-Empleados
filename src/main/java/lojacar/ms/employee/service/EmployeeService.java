@@ -9,8 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-
+import lojacar.ms.employee.clients.ActivityFeignClient;
+import lojacar.ms.employee.entity.Activity;
 import lojacar.ms.employee.entity.Employee;
 import lojacar.ms.employee.entity.EmployeeActivity;
 import lojacar.ms.employee.repository.EmployeeActivityRepository;
@@ -21,6 +21,9 @@ public class EmployeeService implements IEmployee {
 
 	@Autowired
 	EmployeeRepository employeeRepo;
+	
+	@Autowired
+	ActivityFeignClient activity;
 	
 	@Autowired
 	EmployeeActivityRepository eaRepository;
@@ -59,6 +62,12 @@ public class EmployeeService implements IEmployee {
 	public EmployeeActivity saveEA(EmployeeActivity employeActivity) {
 	
 		return eaRepository.save(employeActivity);
+	}
+
+	@Override
+	public Iterable<Activity> obtenerAlumnosPorCursos(List<Integer> ids) {
+		// TODO Auto-generated method stub
+		return activity.obtenerAlumnosPorCursos(ids);
 	}
 
 	/*@Override

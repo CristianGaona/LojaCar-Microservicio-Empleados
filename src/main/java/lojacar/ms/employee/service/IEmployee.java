@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 
+
+import lojacar.ms.employee.entity.Activity;
 import lojacar.ms.employee.entity.Employee;
 import lojacar.ms.employee.entity.EmployeeActivity;
 
@@ -18,5 +20,8 @@ public interface IEmployee {
 	public Employee save (Employee employee);
 	public EmployeeActivity saveEA (EmployeeActivity employeActivity);
 	
-	/*public Iterable<Employee> obtenerAlumnosPorCursos(List<Integer> ids);*/
+
+	
+	//Cliente
+	public Iterable<Activity> obtenerAlumnosPorCursos(List<Integer> ids);
 }
