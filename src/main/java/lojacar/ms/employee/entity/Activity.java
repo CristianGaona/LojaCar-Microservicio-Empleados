@@ -14,6 +14,7 @@ public class Activity implements Serializable {
 	private Integer id;
 	private String description;
 	private Integer employeeId;
+	private Integer clientId;
 	
 	private Date  dateAssignment;
 	
@@ -50,5 +51,12 @@ public class Activity implements Serializable {
 		this.dateAssignment = dateAssignment;
 	}
 	
+	public Integer getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(Integer clientId) {
+		this.clientId = clientId;
+	}
 	
 }

@@ -62,7 +62,7 @@ public class EmployeeController {
 		return ResponseEntity.ok().body(cursos);
 	}
 	
-	//Método que trae las actividades de otra microservicio
+	//Método que trae las actividades de otro microservicio
 	@GetMapping("/{id}")
 	public ResponseEntity<?> ver(@PathVariable Integer id) {
 		Optional<Employee> opt = service.findById1(id);
